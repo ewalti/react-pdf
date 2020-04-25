@@ -64,7 +64,7 @@ class Document {
       }
 
       if (node.children) {
-        node.children.forEach(childNode => {
+        node.children.forEach((childNode) => {
           listToExplore.push(childNode);
         });
       }
@@ -85,7 +85,7 @@ class Document {
       } else if (typeof node.value === 'string') {
         promises.push(...fetchEmojis(node.value));
       } else if (node.children) {
-        node.children.forEach(childNode => {
+        node.children.forEach((childNode) => {
           listToExplore.push(childNode);
         });
       }
@@ -106,7 +106,7 @@ class Document {
       }
 
       if (node.children) {
-        node.children.forEach(childNode => {
+        node.children.forEach((childNode) => {
           listToExplore.push(childNode);
         });
       }
@@ -120,7 +120,7 @@ class Document {
   }
 
   applyProps() {
-    this.children.forEach(child => child.applyProps());
+    this.children.forEach((child) => child.applyProps());
   }
 
   update(newProps) {
@@ -128,17 +128,17 @@ class Document {
   }
 
   cleanup() {
-    this.subpages.forEach(p => p.cleanup());
+    this.subpages.forEach((p) => p.cleanup());
   }
 
   finish() {
-    this.children.forEach(c => c.cleanup());
+    this.children.forEach((c) => c.cleanup());
   }
 
   getLayoutData() {
     return {
       type: this.name,
-      children: this.subpages.map(c => c.getLayoutData()),
+      children: this.subpages.map((c) => c.getLayoutData()),
     };
   }
 
@@ -174,8 +174,9 @@ class Document {
         {
           pageNumber: j + 1,
           totalPages: this.subpages.length,
+          pages: this.subpages,
         },
-        node => node.name === 'Text',
+        (node) => node.name === 'Text',
       );
       await this.subpages[j].render();
     }
